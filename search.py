@@ -29,6 +29,8 @@ def get_Top(query, index):
     results = {}
     
     for token in tokens:
+        if token not in index:
+            return
         for key, value in index[token].items():
             results.update({key: value})
 
@@ -58,5 +60,8 @@ def search():
 
         if query != '':
             top_links = get_Top(query, index)
-            get_results(top_links, bookkeeping)
+            if top_links != None:
+                get_results(top_links, bookkeeping)
+            else:
+                print("Error: Query not found.\n")
 
